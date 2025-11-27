@@ -1,56 +1,63 @@
 /**
- * script.js — smooth reveal + subtle parallax of hero + performance-minded
- * Works on GitHub Pages, no libs, accessible and lightweight.
+ * script.js — premium interactions:
+ *  - smooth reveal (IntersectionObserver)
+ *  - subtle parallax on background by mouse + scroll
+ *  - accessibility: show focus outlines on keyboard navigation
+ *  - respects prefers-reduced-motion
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1) Smooth reveal using IntersectionObserver
-  const revealOpts = { threshold: 0.12 };
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('show');
-        revealObserver.unobserve(e.target); // one-time reveal
+  // Respect reduced motion early
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (reduce.matches) {
+    document.querySelectorAll('.hidden').forEach(el => el.classList.add('show'));
+    document.querySelector('.bg-layer')?.style?.setProperty('animation', 'none');
+    return;
+  }
+
+  // 1) Reveal with IntersectionObserver (one-time)
+  const io = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+        obs.unobserve(entry.target);
       }
     });
-  }, revealOpts);
-  document.querySelectorAll('.hidden').forEach(el => revealObserver.observe(el));
+  }, { threshold: 0.12 });
 
-  // 2) Hero parallax subtle (moves background layer with pointer/scroll)
-  const bg = document.querySelector('.bg-anim');
-  const hero = document.querySelector('.hero');
-  if (bg && hero) {
-    // subtle movement on mousemove (desktop)
-    window.addEventListener('mousemove', (ev) => {
-      const mx = (ev.clientX / window.innerWidth) - 0.5;
-      const my = (ev.clientY / window.innerHeight) - 0.5;
-      // small transform for depth
-      const tx = mx * 8; // px
-      const ty = my * 6;
-      bg.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(1.03)`;
+  document.querySelectorAll('.hidden').forEach(el => io.observe(el));
+
+  // 2) Parallax / subtle move for bg-layer
+  const bg = document.querySelector('.bg-layer');
+  let lastScroll = 0;
+  if (bg) {
+    // mouse move effect (desktop). gentle.
+    window.addEventListener('mousemove', (e) => {
+      const mx = (e.clientX / window.innerWidth) - 0.5;
+      const my = (e.clientY / window.innerHeight) - 0.5;
+      const tx = mx * 10; // px
+      const ty = my * 8;
+      bg.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(1.02)`;
     }, { passive: true });
 
-    // subtle vertical parallax on scroll
+    // scroll parallax (mobile + desktop)
     window.addEventListener('scroll', () => {
-      const sc = window.scrollY;
-      bg.style.transform = `translate3d(0, ${sc * -0.02}px, 0) scale(1.03)`;
+      const s = window.scrollY;
+      // smoother: easing interpolation
+      lastScroll += (s - lastScroll) * 0.12;
+      bg.style.transform = `translate3d(0, ${-lastScroll * 0.04}px, 0) scale(1.02)`;
     }, { passive: true });
   }
 
-  // 3) Improve focus outlines for keyboard users
-  function handleFirstTab(e) {
+  // 3) Keyboard focus outlines: enable when user presses Tab
+  function onFirstTab(e) {
     if (e.key === 'Tab') {
       document.documentElement.classList.add('show-focus');
-      window.removeEventListener('keydown', handleFirstTab);
+      window.removeEventListener('keydown', onFirstTab);
     }
   }
-  window.addEventListener('keydown', handleFirstTab);
+  window.addEventListener('keydown', onFirstTab);
 
-  // 4) Tiny performance tweak: enable prefers-reduced-motion respect
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if (prefersReduced.matches) {
-    // disable animations by quickly showing elements
-    document.querySelectorAll('.hidden').forEach(el => { el.classList.add('show'); });
-    bg.style.animation = 'none';
-  }
+  // 4) Micro-optimization: enable will-change only on visible transitions
+  document.querySelectorAll('.bg-layer, .hero-svg').forEach(el => el.style.willChange = 'transform');
 });
