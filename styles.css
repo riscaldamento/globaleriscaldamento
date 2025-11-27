@@ -1,0 +1,48 @@
+/* Gradient animato */
+:root {
+    --grad-rotate: 0deg;
+}
+
+body {
+    margin: 0;
+    font-family: "Arial", sans-serif;
+    color: #fff;
+    background: linear-gradient(var(--grad-rotate), #3ca55c, #b5ac49);
+    background-attachment: fixed;
+    transition: background 0.3s ease;
+}
+
+/* Hero */
+.hero {
+    text-align: center;
+    padding: 100px 20px;
+}
+
+/* Sezioni */
+.section {
+    max-width: 900px;
+    margin: 60px auto;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 30px;
+    border-radius: 12px;
+    backdrop-filter: blur(5px);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    opacity: 0.8;
+}
+
+/* Scroll reveal */
+.hidden {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease-out;
+}
+
+.show {
+    opacity: 1;
+    transform: translateY(0);
+}
