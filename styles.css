@@ -1,48 +1,99 @@
-/* Gradient animato */
-:root {
-    --grad-rotate: 0deg;
+/* styles.css — Nature Gradient Flow (premium), glassmorphism, responsive */
+:root{
+  --bg-dark:#06131a;
+  --muted:#9db0a6;
+  --accent:#2f8f48;
+  --accent-2:#f6b65a;
+  --card-bg: rgba(255,255,255,0.06);
+  --glass-border: rgba(255,255,255,0.04);
+  --maxwidth:1100px;
+  --radius:14px;
+  --easing: cubic-bezier(.2,.9,.3,1);
+  --grad-angle: 45deg;
+}
+*{box-sizing:border-box}
+html,body{height:100%;scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  color:#eaf6ee;
+  background: linear-gradient(120deg, rgba(10,30,20,1) 0%, rgba(8,22,28,1) 100%);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.5;
+  overflow-x:hidden;
 }
 
-body {
-    margin: 0;
-    font-family: "Arial", sans-serif;
-    color: #fff;
-    background: linear-gradient(var(--grad-rotate), #3ca55c, #b5ac49);
-    background-attachment: fixed;
-    transition: background 0.3s ease;
+/* Animated gradient layer (positioned behind content) */
+.bg-anim{
+  position:fixed;
+  inset:0;
+  z-index:-2;
+  background: linear-gradient(180deg, #2f8f48 0%, #3ca55c 30%, #6bb7e7 60%, #f6b65a 100%);
+  background-size: 300% 300%;
+  filter: saturate(1.05) contrast(1.02);
+  animation: gradFlow 18s var(--easing) infinite;
+  will-change:background-position;
+  opacity:0.95;
 }
+@keyframes gradFlow {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* Subtle overlay to darken edges for readability */
+.bg-anim::after{
+  content:"";
+  position:absolute; inset:0;
+  background: radial-gradient(60% 60% at 10% 10%, rgba(0,0,0,0.08), rgba(0,0,0,0.25) 60%);
+}
+
+/* Container */
+.container{max-width:var(--maxwidth);margin:0 auto;padding:28px}
 
 /* Hero */
-.hero {
-    text-align: center;
-    padding: 100px 20px;
-}
+.hero{min-height:62vh;display:flex;align-items:center}
+.hero-inner{max-width:760px}
+.hero-title{font-size:clamp(32px,6vw,64px);margin:0 0 8px 0;font-weight:800;letter-spacing:-1px}
+.hero-title span{color:var(--accent-2)}
+.hero-sub{margin:0 0 18px 0;color:var(--muted);font-size:1.05rem}
+.hero-actions{display:flex;gap:12px}
 
-/* Sezioni */
-.section {
-    max-width: 900px;
-    margin: 60px auto;
-    background: rgba(0, 0, 0, 0.25);
-    padding: 30px;
-    border-radius: 12px;
-    backdrop-filter: blur(5px);
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:12px;text-decoration:none;font-weight:700;border:1px solid var(--glass-border);cursor:pointer;color:inherit;background:transparent;
+  transition:transform .18s var(--easing), box-shadow .18s var(--easing);
 }
+.btn.primary{
+  background: linear-gradient(90deg, rgba(47,143,72,0.95), rgba(246,182,90,0.93));
+  color:#07210a;border:0;box-shadow:0 10px 30px rgba(47,143,72,0.12);
+}
+.btn.ghost{backdrop-filter: blur(6px);background: rgba(255,255,255,0.03)}
+.btn:hover{transform:translateY(-4px)}
+
+/* Sections */
+.section{background:var(--card-bg);border-radius:12px;padding:22px;margin:24px 0;border:1px solid var(--glass-border);box-shadow: 0 8px 30px rgba(2,8,10,0.6)}
+.lead{color:var(--muted);margin-top:0}
+
+/* Cards grid */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+.card{padding:18px;border-radius:10px;background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02)}
+
+/* Two column */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+.bullet-list{padding-left:18px}
+.stat{margin-top:12px;background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+.stat-number{font-weight:800;font-size:1.5rem}
+.stat-label{color:var(--muted);font-size:0.9rem}
 
 /* Footer */
-footer {
-    text-align: center;
-    padding: 20px;
-    opacity: 0.8;
-}
+.footer{padding:28px 0;color:var(--muted);font-size:0.95rem;text-align:center}
 
-/* Scroll reveal */
-.hidden {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s ease-out;
-}
+/* Reveal animation initial state */
+.hidden{opacity:0;transform:translateY(28px) scale(0.995);transition:opacity .8s var(--easing), transform .8s var(--easing);will-change:opacity,transform}
+.show{opacity:1;transform:none}
 
-.show {
-    opacity: 1;
-    transform: translateY(0);
-}
+/* Small screens */
+@media (max-width:920px){ .cards{grid-template-columns:1fr} .two-col{grid-template-columns:1fr} .hero{padding:28px 0} }
+@media (max-width:480px){ .hero-title{font-size:28px} .container{padding:18px} }
