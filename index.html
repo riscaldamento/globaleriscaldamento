@@ -4,82 +4,129 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Riscaldamento Globale — Riflessione</title>
-  <meta name="description" content="Presentazione sul riscaldamento globale — cause, conseguenze e soluzioni.">
+  <meta name="description" content="Presentazione moderna sul riscaldamento globale — cause, conseguenze e soluzioni.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="bg-anim" aria-hidden="true"></div>
+  <!-- Animated gradient background layer -->
+  <div class="bg-layer" aria-hidden="true"></div>
 
-  <header class="hero">
-    <div class="hero-inner container">
-      <h1 class="hero-title hidden">Riscaldamento <span>Globale</span></h1>
-      <p class="hero-sub hidden">Capire l'impatto oggi per costruire un domani sostenibile.</p>
-      <nav class="hero-actions hidden">
-        <a class="btn primary" href="#why">Scopri</a>
-        <a class="btn ghost" href="#consequences">Conseguenze</a>
-        <a class="btn ghost" href="#reflection">Riflessione</a>
-      </nav>
-    </div>
-  </header>
+  <!-- Page wrapper centers everything -->
+  <div class="page">
+    <header class="hero" id="home" role="banner">
+      <div class="hero-inner">
+        <div class="kicker">Progetto di Geografia</div>
+        <h1 class="hero-title">
+          Riscaldamento <span>Globale</span>
+        </h1>
+        <p class="hero-sub">Capire l'impatto, riflettere sulle cause e agire per il futuro.</p>
 
-  <main>
-    <section id="why" class="section container hidden">
-      <h2>Cos'è il riscaldamento globale?</h2>
-      <p class="lead">È l'aumento della temperatura media della Terra dovuto all'accumulo di gas serra nell'atmosfera, prodotto principalmente da attività umane. Questo altera i cicli climatici e mette a rischio ecosistemi e comunità.</p>
+        <nav class="hero-cta" aria-label="Azioni principali">
+          <a class="btn primary" href="#why">Scopri</a>
+          <a class="btn ghost" href="#consequences">Conseguenze</a>
+          <a class="btn ghost" href="#solutions">Soluzioni</a>
+        </nav>
 
-      <div class="cards">
-        <article class="card">
-          <h3>Cause</h3>
-          <p>Emissioni di CO₂, deforestazione, uso di combustibili fossili e pratiche agricole intensive.</p>
-        </article>
-        <article class="card">
-          <h3>Effetti</h3>
-          <p>Aumento delle temperature, scioglimento di ghiacciai, innalzamento del livello del mare, eventi estremi più frequenti.</p>
-        </article>
-        <article class="card">
-          <h3>Soluzioni</h3>
-          <p>Transizione energetica, efficienza, riforestazione, politiche e comportamenti sostenibili.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="consequences" class="section container hidden">
-      <h2>Conseguenze visibili</h2>
-      <div class="two-col">
-        <div>
-          <p class="lead">Gli effetti sono già osservabili: ondate di calore, incendi, siccità estreme e alluvioni imprevedibili.</p>
-          <ul class="bullet-list">
-            <li>Rischio per la salute e l'agricoltura</li>
-            <li>Perdita di habitat e biodiversità</li>
-            <li>Innalzamento del livello del mare</li>
-          </ul>
+        <div class="hero-deco" aria-hidden="true">
+          <!-- subtle SVG circles for depth -->
+          <svg width="720" height="360" viewBox="0 0 720 360" preserveAspectRatio="xMidYMid slice" class="hero-svg">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1">
+                <stop offset="0" stop-color="#3ca55c" stop-opacity="0.12"/>
+                <stop offset="1" stop-color="#f6b65a" stop-opacity="0.12"/>
+              </linearGradient>
+            </defs>
+            <circle cx="120" cy="80" r="140" fill="url(#g1)"/>
+            <circle cx="520" cy="140" r="120" fill="url(#g1)"/>
+          </svg>
         </div>
-        <div>
-          <div class="stat">
-            <div class="stat-number">+1.1°C</div>
-            <div class="stat-label">Incremento medio globale (esempio illustrativo)</div>
+      </div>
+    </header>
+
+    <main>
+      <section id="why" class="section card">
+        <div class="container">
+          <h2>Cos'è il riscaldamento globale</h2>
+          <p class="lead">È l'aumento della temperatura media globale causato dall'accumulo di gas serra nell'atmosfera. Le attività umane — combustibili fossili, deforestazione e agricoltura intensiva — sono le principali responsabili.</p>
+
+          <div class="grid-3">
+            <article class="info">
+              <h3>Emissioni</h3>
+              <p>CO₂, metano e altri gas intrappolano il calore provocando effetti a scala globale.</p>
+            </article>
+            <article class="info">
+              <h3>Clima alterato</h3>
+              <p>Modifica dei regimi delle precipitazioni, ondate di calore e maggior frequenza di eventi estremi.</p>
+            </article>
+            <article class="info">
+              <h3>Impatto umano</h3>
+              <p>Effetti su agricoltura, risorse idriche, salute pubblica e migrazioni forzate.</p>
+            </article>
           </div>
-          <p class="note">Per dati ufficiali cita IPCC, NASA, NOAA (inserirò fonti se vuoi).</p>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="reflection" class="section container hidden">
-      <h2>Riflessione personale</h2>
-      <p class="lead">A livello individuale possiamo ridurre gli sprechi, scegliere mezzi sostenibili e informare gli altri. A livello collettivo servono politiche coraggiose e investimenti nelle rinnovabili.</p>
-      <div class="cta-row">
-        <a class="btn primary" href="#why">Rileggi le cause</a>
-        <a class="btn ghost" href="#consequences">Guarda le conseguenze</a>
-      </div>
-    </section>
-  </main>
+      <section id="consequences" class="section card">
+        <div class="container two-col">
+          <div>
+            <h2>Conseguenze osservabili</h2>
+            <ul class="bullet">
+              <li>Scioglimento dei ghiacciai e innalzamento del livello del mare</li>
+              <li>Maggiore frequenza di ondate di calore e incendi</li>
+              <li>Desertificazione e perdita di biodiversità</li>
+            </ul>
+            <p class="muted">(Per dati ufficiali cita IPCC, NASA, NOAA — posso aggiungerli nel sito se vuoi.)</p>
+          </div>
 
-  <footer class="footer">
-    <div class="container footer-inner">
-      <p>Progetto scolastico — Riscaldamento Globale • Creato da <strong>Tuo Nome</strong></p>
-      <p class="small">Per la consegna: aggiungi fonti aggiornate (IPCC/NASA) come documento allegato.</p>
-    </div>
-  </footer>
+          <aside class="stat-card">
+            <div class="stat-big">+1.1<span class="small">°C</span></div>
+            <div class="stat-label">Incremento medio dalla era preindustriale<br><span class="muted small">(valore esemplificativo)</span></div>
+            <div class="stat-extra">Aumentano eventi estremi e impatti socio-economici.</div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="solutions" class="section card">
+        <div class="container">
+          <h2>Soluzioni pratiche</h2>
+          <div class="grid-3">
+            <article class="info">
+              <h3>Energie rinnovabili</h3>
+              <p>Transizione da combustibili fossili verso solare, eolico e altre fonti pulite.</p>
+            </article>
+            <article class="info">
+              <h3>Efficienza</h3>
+              <p>Migliorare l'efficienza energetica in edifici, industria e trasporti.</p>
+            </article>
+            <article class="info">
+              <h3>Territorio</h3>
+              <p>Riforestazione, gestione sostenibile del suolo e politiche di adattamento.</p>
+            </article>
+          </div>
+
+          <div class="cta-center">
+            <a class="btn primary large" href="#reflection">Leggi la riflessione</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="reflection" class="section card">
+        <div class="container">
+          <h2>Riflessione personale</h2>
+          <p class="lead">Difendere l'ambiente significa costruire il futuro. Anche piccoli gesti quotidiani, combinati con scelte politiche coraggiose, fanno la differenza. Come studente, posso informare gli altri e praticare comportamenti più sostenibili.</p>
+          <div class="signature">— <strong>Tuo Nome</strong></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div class="foot-left">Progetto scolastico • Riscaldamento Globale</div>
+        <div class="foot-right muted">Per la consegna: aggiungi le fonti ufficiali (IPCC, NASA).</div>
+      </div>
+    </footer>
+  </div>
 
   <script src="script.js"></script>
 </body>
